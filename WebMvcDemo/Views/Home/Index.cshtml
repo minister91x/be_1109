@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    var list2 = ViewBag.studentModels != null ? (List<WebMvcDemo.Models.StudentModels_New>)ViewBag.studentModels : new List<WebMvcDemo.Models.StudentModels_New>();
+}
+@model WebMvcDemo.Models.StudentModels_TrungGian
+
+<div class="jumbotron">
+    <h1>KHÓA HỌC ASP.NET MR QUÂN </h1>
+
+</div>
+
+@Html.ActionLink("BẤM VÀO ĐÂY","Contact","Home")
+@Url.Action("Contact", "Home")
+<h1>Danh sách 1</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.studentModel != null && Model.studentModels.Count > 0)
+        {
+            foreach (var item in Model.studentModels)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<hr />
+<h1>Danh sách 2</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @*@if (Model != null && Model.StudentModels_New != null && Model.StudentModels_New.Count > 0)
+        {
+            foreach (var item in Model.StudentModels_New)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                </tr>
+            }
+        }*@
+
+        @if (list2.Count > 0)
+        {
+            foreach (var item in list2)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
