@@ -15,3 +15,29 @@
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
+@*@Html.Action("DemoPartialView", "Home")*@
+<div id="DemoPartialViewData"></div>
+<script>
+    $(document).ready(function () {
+        loadPartialView();
+    });
+
+    function loadPartialView() {
+        //var param = {
+        //    id: id
+        //};
+
+        $.ajax({
+            type: 'GET',
+            url: "/Home/DemoPartialView",
+            data: {},
+            dataType: "html",
+            success: function (da_ta) {
+                $("#DemoPartialViewData").html(da_ta);
+            },
+            error: function (data) {
+                console.log("error:" + JSON.stringify(data));
+            }
+        });
+    }
+</script>

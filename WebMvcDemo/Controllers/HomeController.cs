@@ -11,7 +11,7 @@ namespace WebMvcDemo.Controllers
     {
         public ActionResult Index(int? id)
         {
-            return RedirectToAction("About", "Home");
+
             var listModel = new StudentModels_TrungGian();
             var list = new List<StudentModels>();
             var listNew = new List<StudentModels_New>();
@@ -65,6 +65,11 @@ namespace WebMvcDemo.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult DemoPartialView()
+        {
+            return PartialView();
         }
     }
 }

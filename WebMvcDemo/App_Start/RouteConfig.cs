@@ -14,13 +14,13 @@ namespace WebMvcDemo
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 
-            routes.MapRoute(
-                name: Guid.NewGuid().ToString(),
-                url: "{controller}/{action}/{name}",
-                defaults: new { controller = "Home", action = "About", name = UrlParameter.Optional }
-            );
+            //routes.MapRoute(
+            //    name: Guid.NewGuid().ToString(),
+            //    url: "{controller}/{action}/{name}",
+            //    defaults: new { controller = "Home", action = "About", name = UrlParameter.Optional }
+            //);
 
-    
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

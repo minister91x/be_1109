@@ -1,16 +1,19 @@
 ﻿@{
     ViewBag.Title = "Home Page";
     var list2 = ViewBag.studentModels != null ? (List<WebMvcDemo.Models.StudentModels_New>)ViewBag.studentModels : new List<WebMvcDemo.Models.StudentModels_New>();
+
+    var datetine = DateTime.Now.ToString("dd/MM/yyyy");
+  
 }
 @model WebMvcDemo.Models.StudentModels_TrungGian
 
 <div class="jumbotron">
-    <h1>KHÓA HỌC ASP.NET MR QUÂN </h1>
+    <h1>KHÓA HỌC ASP.NET MR QUÂN @datetine</h1>
 
 </div>
 
-@Html.ActionLink("BẤM VÀO ĐÂY","Contact","Home")
-@Url.Action("Contact", "Home")
+@*@Html.ActionLink("BẤM VÀO ĐÂY","Contact","Home")
+@Url.Action("Contact", "Home")*@
 <h1>Danh sách 1</h1>
 <table class="table table-striped">
     <thead>
