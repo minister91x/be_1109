@@ -1,56 +1,38 @@
-﻿using System;
+﻿using DataAccess.Demo.DO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebMvcDemo.Filter;
 using WebMvcDemo.Models;
 
 namespace WebMvcDemo.Controllers
 {
+    [Log]
     public class HomeController : Controller
     {
+
         public ActionResult Index(int? id)
         {
-
-            var listModel = new StudentModels_TrungGian();
-            var list = new List<StudentModels>();
-            var listNew = new List<StudentModels_New>();
+            var lst = new List<Category>();
             try
             {
-                for (int i = 0; i < 10; i++)
-                {
-                    var model = new StudentModels
-                    {
-                        Id = i,
-                        Name = "NGUYEN VAN" + i
-                    };
-
-                    list.Add(model);
-                }
-
-                for (int i = 0; i < 10; i++)
-                {
-                    var model2 = new StudentModels_New
-                    {
-                        Id = i,
-                        Name = "NGUYEN VAN NEW" + i
-                    };
-
-                    listNew.Add(model2);
-                }
-
-
-                listModel.studentModels = list;
-                //listModel.StudentModels_New = listNew;
-
-                ViewBag.studentModels = listNew;
+                var lsst = new DataAccess.Demo.DAOImpl.CategoryDAOImpl();
+                lsst.GetProducts();
             }
             catch (Exception ex)
             {
 
                 throw;
             }
-            return View(listModel);
+            return View(lst);
+        }
+
+
+        public ActionResult Test()
+        {
+            return Json(new { }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult About(string name)
