@@ -3,17 +3,28 @@
     var list2 = ViewBag.studentModels != null ? (List<WebMvcDemo.Models.StudentModels_New>)ViewBag.studentModels : new List<WebMvcDemo.Models.StudentModels_New>();
 
     var datetine = DateTime.Now.ToString("dd/MM/yyyy");
-  
+
+    if (DateTime.IsLeapYear(DateTime.Now.Year))
+    {
+        @DateTime.Now.Year @:is a leap year.
+    }
+    else
+    {
+        @DateTime.Now.Year @:is not a leap year.
+    }
+
 }
 @model WebMvcDemo.Models.StudentModels_TrungGian
 
 <div class="jumbotron">
     <h1>KHÓA HỌC ASP.NET MR QUÂN @datetine</h1>
+    @Html.ActionLink("BẤM VÀO ĐÂY", "Contact", "Home")
+   
 
 </div>
 
 @*@Html.ActionLink("BẤM VÀO ĐÂY","Contact","Home")
-@Url.Action("Contact", "Home")*@
+    @Url.Action("Contact", "Home")*@
 <h1>Danh sách 1</h1>
 <table class="table table-striped">
     <thead>
@@ -46,15 +57,15 @@
     </thead>
     <tbody>
         @*@if (Model != null && Model.StudentModels_New != null && Model.StudentModels_New.Count > 0)
-        {
-            foreach (var item in Model.StudentModels_New)
             {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Name</td>
-                </tr>
-            }
-        }*@
+                foreach (var item in Model.StudentModels_New)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                    </tr>
+                }
+            }*@
 
         @if (list2.Count > 0)
         {

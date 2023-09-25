@@ -1,4 +1,22 @@
-﻿<p>Use this area to provide additional information.</p>
-sSs
-Áá
-Á
+﻿@model List<WebMvcDemo.Models.CategoryViewModel>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CategoryId</td>
+                    <td>@item.CategoryName</td>
+                    <td>@item.CategoryTypeName</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

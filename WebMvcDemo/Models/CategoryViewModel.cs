@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace DataAccess.Demo.DO
+namespace WebMvcDemo.Models
 {
-    public class Category
+    public class CategoryViewModel
     {
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public string CategoryDescription { get; set; }
-        public int CategoryType { get; set; } = 1;
+        public string CategoryTypeName { get;set; }
+
+        public DateTime currentDate { get; set; }
     }
 }

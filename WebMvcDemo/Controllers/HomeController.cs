@@ -15,18 +15,8 @@ namespace WebMvcDemo.Controllers
 
         public ActionResult Index(int? id)
         {
-            var lst = new List<Category>();
-            try
-            {
-                var lsst = new DataAccess.Demo.DAOImpl.CategoryDAOImpl();
-                lsst.GetProducts();
-            }
-            catch (Exception ex)
-            {
 
-                throw;
-            }
-            return View(lst);
+            return View();
         }
 
 
@@ -51,7 +41,49 @@ namespace WebMvcDemo.Controllers
 
         public ActionResult DemoPartialView()
         {
-            return PartialView();
+            var lst = new List<CategoryViewModel>();
+            try
+            {
+                var lsst = new DataAccess.Demo.DAOImpl.CategoryDAOImpl();
+                var domainModels = lsst.GetProducts();
+                if (domainModels.Count > 0)
+                {
+                    foreach (var item in domainModels)
+                    {
+                        var viewModel = new CategoryViewModel();
+                        viewModel.CategoryId = item.CategoryId;
+                        viewModel.CategoryName = item.CategoryName;
+                        viewModel.CategoryTypeName = item.CategoryType == 0
+                            ? "Loại 1" : item.CategoryType == 2 ? "Loại 2" : "Loại 3";
+                        lst.Add(viewModel);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return PartialView(lst);
+        }
+
+        public ActionResult CategoryInsertUpdate(CategoryInsertModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    // Nếu = false dữ liệu không hợp lệ
+                    // Nếu = true dữ liệu hợp lệ
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return Json(new { code = 1, mes = "ok" }, JsonRequestBehavior.AllowGet);
         }
     }
 }

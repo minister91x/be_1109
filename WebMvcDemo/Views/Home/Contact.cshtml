@@ -5,10 +5,15 @@
 <h3>@ViewBag.Message</h3>
 
 <address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <input type="text" id="txtCategoryName" class="form-control col-md-6" />
+                <button id="btnInsert" class="btn btn-primary col-md-2">Save</button>
+            </div>
+        </div>
+    </div>
+
 </address>
 
 <address>
@@ -20,6 +25,9 @@
 <script>
     $(document).ready(function () {
         loadPartialView();
+        $("#btnInsert").click(function () {
+            CategoryInsertUpdate();
+        });
     });
 
     function loadPartialView() {
@@ -35,6 +43,29 @@
             success: function (da_ta) {
                 $("#DemoPartialViewData").html("");
                 $("#DemoPartialViewData").html(da_ta);
+            },
+            error: function (data) {
+                console.log("error:" + JSON.stringify(data));
+            }
+        });
+    }
+
+    function CategoryInsertUpdate() {
+        var param = {
+            CategoryId: 0,
+            CategoryName: $("#txtCategoryName").val(),
+            CategoryDescription: "def",
+            CategoryType: 1,
+            IsUpdateImage: 0
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: "/Home/CategoryInsertUpdate",
+            data: param,
+            dataType: "json",
+            success: function (da_ta) {
+                alert(da_ta.mes)
             },
             error: function (data) {
                 console.log("error:" + JSON.stringify(data));

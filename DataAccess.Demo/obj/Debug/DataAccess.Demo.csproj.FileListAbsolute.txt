@@ -1,0 +1,6 @@
+C:\Users\Admin\source\repos\BE1109\DataAccess.Demo\bin\Debug\DataAccess.Demo.dll
+C:\Users\Admin\source\repos\BE1109\DataAccess.Demo\bin\Debug\DataAccess.Demo.pdb
+C:\Users\Admin\source\repos\BE1109\DataAccess.Demo\obj\Debug\DataAccess.Demo.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\BE1109\DataAccess.Demo\obj\Debug\DataAccess.Demo.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\BE1109\DataAccess.Demo\obj\Debug\DataAccess.Demo.dll
+C:\Users\Admin\source\repos\BE1109\DataAccess.Demo\obj\Debug\DataAccess.Demo.pdb

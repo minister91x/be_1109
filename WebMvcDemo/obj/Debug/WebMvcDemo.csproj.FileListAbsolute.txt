@@ -77,3 +77,5 @@ C:\Users\Admin\source\repos\BE1109\WebMvcDemo\obj\Debug\WebMvcDemo.csproj.CoreCo
 C:\Users\Admin\source\repos\BE1109\WebMvcDemo\obj\Debug\WebMvcDemo.csproj.CopyComplete
 C:\Users\Admin\source\repos\BE1109\WebMvcDemo\obj\Debug\WebMvcDemo.dll
 C:\Users\Admin\source\repos\BE1109\WebMvcDemo\obj\Debug\WebMvcDemo.pdb
+C:\Users\Admin\source\repos\BE1109\WebMvcDemo\bin\DataAccess.Demo.dll
+C:\Users\Admin\source\repos\BE1109\WebMvcDemo\bin\DataAccess.Demo.pdb
