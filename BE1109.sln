@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMvcDemo", "WebMvcDemo\We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Demo", "DataAccess.Demo\DataAccess.Demo.csproj", "{907254CE-1EBA-4A85-9462-478945102E9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebNetCoreMvc", "WebNetCoreMvc\WebNetCoreMvc.csproj", "{4E53AC41-91F4-4914-880A-B3B8C6E567BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebNetCoreMvc", "WebNetCoreMvc\WebNetCoreMvc.csproj", "{4E53AC41-91F4-4914-880A-B3B8C6E567BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Computer", "DataAccess.Computer\DataAccess.Computer.csproj", "{E14115B0-266B-45AC-B388-DBA0394F42DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{4E53AC41-91F4-4914-880A-B3B8C6E567BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E53AC41-91F4-4914-880A-B3B8C6E567BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E53AC41-91F4-4914-880A-B3B8C6E567BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E14115B0-266B-45AC-B388-DBA0394F42DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E14115B0-266B-45AC-B388-DBA0394F42DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E14115B0-266B-45AC-B388-DBA0394F42DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E14115B0-266B-45AC-B388-DBA0394F42DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

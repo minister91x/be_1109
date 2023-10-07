@@ -1,4 +1,6 @@
 using BE1109;
+using DataAccess.Computer.IServices;
+using DataAccess.Computer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<IProductServices, ProductServices>();
 
 var app = builder.Build();
 
@@ -23,7 +26,7 @@ if (app.Environment.IsDevelopment())
 //    await context.Response.WriteAsync("Hello world!");
 //});
 
-app.UseMiddleware<SimpleMiddleware>();
+//app.UseMiddleware<SimpleMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();
