@@ -8,7 +8,9 @@ namespace DataAccess.Computer.DO
 {
     public class Product
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        public string DonViTinh { get; set; }
+        public int DonGia { get; set; }
     }
 }

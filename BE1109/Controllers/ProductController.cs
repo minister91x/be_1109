@@ -1,4 +1,5 @@
-﻿using DataAccess.Computer.IServices;
+﻿using DataAccess.Computer.DO;
+using DataAccess.Computer.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,9 +32,19 @@ namespace BE1109.Controllers
             }
         }
 
+        [HttpPost("ProductInsert")]
+        public async Task<ActionResult> ProductInsert(Product product)
+        {
+            try
+            {
+                var result = await _productServices.ProductInsert(product);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
 
-
-
-
+                throw;
+            }
+        }
     }
 }

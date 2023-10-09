@@ -1,4 +1,5 @@
-﻿using DataAccess.Computer.DO;
+﻿using DataAccess.Computer.DBContext;
+using DataAccess.Computer.DO;
 using DataAccess.Computer.IServices;
 using System;
 using System.Collections.Generic;
@@ -10,20 +11,24 @@ namespace DataAccess.Computer.Services
 {
     public class ProductServices : IProductServices
     {
-        //public ProductServices(string a, int b, string c)
-        //{
+        MyShopDbContext _dbContext;
 
-        //}
+        public ProductServices(MyShopDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
         public async Task<List<Product>> GetProducts()
         {
             var list = new List<Product>();
             try
             {
-                for (int i = 10; i < 15; i++)
-                {
-                    list.Add(new Product { Id = i, Name = "Iphone " + i });
-                }
+                //for (int i = 10; i < 15; i++)
+                //{
+                //    list.Add(new Product { Id = i, Name = "Iphone " + i });
+                //}
+
+                list =  _dbContext.product.ToList();
             }
             catch (Exception ex)
             {
@@ -34,9 +39,21 @@ namespace DataAccess.Computer.Services
             return list;
         }
 
-        public Task<int> ProductInsert(Product product)
+        public async Task<int> ProductInsert(Product product)
         {
-            throw new NotImplementedException();
+            var result = 0;
+            try
+            {
+                _dbContext.product.Add(product);
+                return _dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            return result;
         }
     }
 }

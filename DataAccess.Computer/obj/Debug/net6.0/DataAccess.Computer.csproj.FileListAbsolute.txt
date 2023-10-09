@@ -10,3 +10,5 @@ C:\Users\Admin\source\repos\BE1109\DataAccess.Computer\obj\Debug\net6.0\DataAcce
 C:\Users\Admin\source\repos\BE1109\DataAccess.Computer\obj\Debug\net6.0\refint\DataAccess.Computer.dll
 C:\Users\Admin\source\repos\BE1109\DataAccess.Computer\obj\Debug\net6.0\DataAccess.Computer.pdb
 C:\Users\Admin\source\repos\BE1109\DataAccess.Computer\obj\Debug\net6.0\ref\DataAccess.Computer.dll
+C:\Users\Admin\source\repos\BE1109\DataAccess.Computer\bin\Debug\net6.0\DataAccess.Computer.runtimeconfig.json
+C:\Users\Admin\source\repos\BE1109\DataAccess.Computer\obj\Debug\net6.0\DataAccess.Computer.genruntimeconfig.cache
