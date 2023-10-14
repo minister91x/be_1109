@@ -15,6 +15,7 @@ namespace DataAccess.Computer.DBContext
         }
         protected override void OnModelCreating(ModelBuilder builder) { base.OnModelCreating(builder); }
         public DbSet<Product>? product { get; set; }
+        public DbSet<Account> user { get; set; }
 
     }
 }

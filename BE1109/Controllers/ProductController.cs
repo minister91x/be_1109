@@ -9,8 +9,8 @@ namespace BE1109.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private IProductServices _productServices;
-        public ProductController(IProductServices productServices)
+        private IProductRepository _productServices;
+        public ProductController(IProductRepository productServices)
         {
             _productServices = productServices;
         }
