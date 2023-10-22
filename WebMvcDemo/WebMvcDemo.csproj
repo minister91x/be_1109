@@ -122,6 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Filter\LogAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -130,6 +131,8 @@
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\CategoryInsertModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\Product\ProductListRequestData.cs" />
+    <Compile Include="Models\Product\ProductList.cs" />
     <Compile Include="Models\StudentModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -2227,6 +2230,8 @@
     <Content Include="Views\Home\DemoPartialView.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\ProductListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

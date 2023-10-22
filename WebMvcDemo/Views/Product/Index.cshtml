@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Nhập tên sản phẩm" />
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Nhập đơn giá" />
+            </div>
+            <div class="col-md-6">
+               <a class="btn btn-success">Thêm</a>
+            </div>
+        </div>
+        <div id="ProductListPartial"></div>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+        LoadData();
+    });
+
+    function LoadData() {
+
+        var param = {
+            token: getCookie("BE_1109_Token")
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: "/Product/ProductListPartial",
+            data: param,
+            dataType: "html",
+            success: function (da_ta) {
+                $("#ProductListPartial").html("");
+                $("#ProductListPartial").html(da_ta);
+            },
+            error: function (data) {
+                console.log("error:" + JSON.stringify(data));
+            }
+        });
+    }
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+</script>

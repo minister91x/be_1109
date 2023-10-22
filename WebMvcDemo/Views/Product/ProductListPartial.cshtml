@@ -1,0 +1,27 @@
+﻿@model List<WebMvcDemo.Models.Product.ProductList>
+<table class="table">
+    <thead>
+        <tr>
+            <th>productID</th>
+            <th>productName</th>
+            <th>donGia</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.productID</td>
+                    <td>@item.productName</td>
+                    <td>@item.donGia</td>
+                    <td><a class="btn btn-primary">Sửa</a>
+                        <a class="btn btn-danger">Xóa</a></td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
