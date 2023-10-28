@@ -46,6 +46,7 @@ namespace WebMvcDemo.Controllers
                 {
                     lst = result_data.items;
                 }
+
             }
             catch (Exception ex)
             {
@@ -55,5 +56,11 @@ namespace WebMvcDemo.Controllers
 
             return PartialView(lst);
         }
+    }
+
+    public class HoaDonDienTu
+    {
+        public string key { get; set; }
+        public string content { get; set; }
     }
 }

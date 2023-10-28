@@ -18,6 +18,28 @@ namespace DataAccess.Computer.Services
             _dbContext = dbContext;
         }
 
+        public async Task<int> Account_UpdateRefeshToken(Account_UpdateRefeshTokenRequestData requestData)
+        {
+            try
+            {
+                var user = _dbContext.user.ToList().FindAll(s => s.UserID == requestData.UserID).FirstOrDefault();
+                if (user == null || user.UserID == 0)
+                {
+                    return -1;
+                }
+                user.RefreshToken = requestData.RefreshToken;
+                user.RefreshTokenExpiryTime = requestData.RefreshTokenExpiryTime;
+                _dbContext.user.Update(user);
+                return _dbContext.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         public async Task<Account> Login(AccountLoginRequestData requestData)
         {
             try

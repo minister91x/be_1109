@@ -1,4 +1,5 @@
-﻿using BE1109.Models;
+﻿using BE1109.FilterAtribute;
+using BE1109.Models;
 using DataAccess.Computer.DO;
 using DataAccess.Computer.IServices;
 using Microsoft.AspNetCore.Http;
@@ -19,17 +20,11 @@ namespace BE1109.Controllers
 
 
         [HttpPost("Product_GetList")]
-
+        [MyShopAuthorize("PRODUCT_GETLIST", "VIEW")]
         public async Task<ActionResult> Product_GetList()
         {
             try
             {
-                var userLogin = GetCurrentUser();
-                if (userLogin.UserID <= 0)
-                {
-                    return BadRequest();
-                }
-
                 var result = await _productServices.GetProducts();
                 return Ok(new { items = result });
             }
@@ -41,6 +36,7 @@ namespace BE1109.Controllers
         }
 
         [HttpPost("ProductInsert")]
+        [MyShopAuthorize("PRODUCT_INSERT", "INSERT")]
         public async Task<ActionResult> ProductInsert(Product product)
         {
             try

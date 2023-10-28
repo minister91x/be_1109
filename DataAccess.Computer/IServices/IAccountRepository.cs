@@ -10,5 +10,6 @@ namespace DataAccess.Computer.IServices
     public interface IAccountRepository
     {
         Task<Account> Login(AccountLoginRequestData requestData);
+        Task<int> Account_UpdateRefeshToken(Account_UpdateRefeshTokenRequestData requestData);
     }
 }
