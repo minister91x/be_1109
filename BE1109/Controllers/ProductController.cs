@@ -2,6 +2,7 @@
 using BE1109.Models;
 using DataAccess.Computer.DO;
 using DataAccess.Computer.IServices;
+using DataAccess.Computer.UnitOfWork;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -12,20 +13,26 @@ namespace BE1109.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private IProductRepository _productServices;
-        public ProductController(IProductRepository productServices)
+        // private IProductRepository _productServices;
+        private IMyShopUnitOfWork _myShopUnitOfWork;
+        //public ProductController(IProductRepository productServices)
+        //{
+        //    _productServices = productServices;
+        //}
+
+        public ProductController(IMyShopUnitOfWork myShopUnitOfWork)
         {
-            _productServices = productServices;
+            _myShopUnitOfWork = myShopUnitOfWork;
         }
 
-
         [HttpPost("Product_GetList")]
-        [MyShopAuthorize("PRODUCT_GETLIST", "VIEW")]
+        // [MyShopAuthorize("PRODUCT_GETLIST", "VIEW")]
         public async Task<ActionResult> Product_GetList()
         {
             try
             {
-                var result = await _productServices.GetProducts();
+                // var result = await _myShopUnitOfWork._productRepository.GetProducts();
+                var result = _myShopUnitOfWork._productGenericRepository.GetAll();
                 return Ok(new { items = result });
             }
             catch (Exception ex)
@@ -43,7 +50,8 @@ namespace BE1109.Controllers
             {
 
                 await Task.Delay(300);
-                var result = await _productServices.ProductInsert(product);
+                // var result = await _myShopUnitOfWork._productRepository.ProductInsert(product);
+                var result = await _myShopUnitOfWork._productGenericRepository.Add(product);
                 return Ok(result);
             }
             catch (Exception ex)

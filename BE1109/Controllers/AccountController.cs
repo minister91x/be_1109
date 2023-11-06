@@ -113,8 +113,12 @@ namespace BE1109.Controllers
             //return new ObjectResult(new
             //{
             //    accessToken = new JwtSecurityTokenHandler().WriteToken(newAccessToken),
-            //    refreshToken = newRefreshToken
+            //    ref
+            //
+            //    reshToken = newRefreshToken
             //});
+
+            return Ok();
         }
 
         private JwtSecurityToken CreateToken(List<Claim> authClaims)

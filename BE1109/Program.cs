@@ -2,6 +2,7 @@ using BE1109;
 using DataAccess.Computer.DBContext;
 using DataAccess.Computer.IServices;
 using DataAccess.Computer.Services;
+using DataAccess.Computer.UnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +38,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IProductRepository, ProductServices>();
 builder.Services.AddTransient<IAccountRepository, AccountRepository>();
+
+builder.Services.AddTransient<IAccountGenericRepository, AccountGenericRepository>();
+builder.Services.AddTransient<IProductGenericRepository, ProductGenericRepository>();
+builder.Services.AddTransient<IMyShopUnitOfWork, MyShopUnitOfWork>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
