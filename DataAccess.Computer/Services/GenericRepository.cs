@@ -3,6 +3,7 @@ using DataAccess.Computer.DO;
 using DataAccess.Computer.IServices;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,16 +17,16 @@ namespace DataAccess.Computer.Services
         {
             _dbContext = dbContext;
         }
-
+      
         public async Task<int> Add(T entity)
         {
             _dbContext.Add(entity);
             return _dbContext.SaveChanges();
         }
-
+      
         public async Task<List<T>> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Set<T>().AsQueryable().ToList();
         }
 
         public Task<T> GetById(int id)

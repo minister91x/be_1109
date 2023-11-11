@@ -28,6 +28,9 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+              "C:\\Users\\Admin\\source\\repos\\BE1109\\Computer.Common\\Computer.Common.csproj": {
+                "projectPath": "C:\\Users\\Admin\\source\\repos\\BE1109\\Computer.Common\\Computer.Common.csproj"
+              },
               "C:\\Users\\Admin\\source\\repos\\BE1109\\DataAccess.Computer\\DataAccess.Computer.csproj": {
                 "projectPath": "C:\\Users\\Admin\\source\\repos\\BE1109\\DataAccess.Computer\\DataAccess.Computer.csproj"
               }
@@ -54,6 +57,14 @@
               "target": "Package",
               "version": "[6.0.22, )"
             },
+            "Microsoft.Extensions.Caching.StackExchangeRedis": {
+              "target": "Package",
+              "version": "[7.0.13, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.2, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
@@ -79,6 +90,21 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
+      }
+    },
+    "C:\\Users\\Admin\\source\\repos\\BE1109\\Computer.Common\\Computer.Common.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\BE1109\\Computer.Common\\Computer.Common.csproj",
+        "projectName": "Computer.Common",
+        "projectPath": "C:\\Users\\Admin\\source\\repos\\BE1109\\Computer.Common\\Computer.Common.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
       }
     },
     "C:\\Users\\Admin\\source\\repos\\BE1109\\DataAccess.Computer\\DataAccess.Computer.csproj": {
@@ -117,6 +143,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.22, )"

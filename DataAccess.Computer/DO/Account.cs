@@ -52,4 +52,10 @@ namespace DataAccess.Computer.DO
         public string refeshToken { get; set; }
         public string Desciption { get; set; }
     }
+
+    public class MediaReturnData
+    {
+        public int ResponseCode { get; set; }
+        public string Description { get; set; }
+    }
 }

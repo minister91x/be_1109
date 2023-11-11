@@ -8,24 +8,117 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Nhập tên sản phẩm" />
+                <input type="text" class="form-control" id="txtProductName" placeholder="Nhập tên sản phẩm" />
             </div>
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Nhập đơn giá" />
+                <input type="text" class="form-control" id="txtProductDonGia" placeholder="Nhập đơn giá" />
             </div>
             <div class="col-md-6">
-               <a class="btn btn-success">Thêm</a>
+                ẢNH SẢN PHẨM:
+                <input type="file" id="upload" class="form-control" placeholder="Nhập đơn giá" multiple="multiple" />
+            </div>
+            <div class="col-md-6">
+
+                <div id="dvPreview"></div>
+            </div>
+            <div class="col-md-6">
+                <a class="btn btn-success" id="btnSaveProduct">Thêm</a>
             </div>
         </div>
         <div id="ProductListPartial"></div>
     </div>
 </div>
 <script>
-
+    var imageChange = 0;
     $(document).ready(function () {
         LoadData();
+
+        $("#btnSaveProduct").click(function () {
+            ProductInsert();
+        });
+
+        $('#upload').on('change', function () {
+            imageChange = 1;
+            if (typeof (FileReader) != "undefined") {
+                var dvPreview = $("#dvPreview");
+                dvPreview.html("");
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                var index = 0;
+                $($(this)[0].files).each(function () {
+                    var file = $(this);
+                    if (regex.test(file[0].name.toLowerCase())) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var img = $("<img class='img_" + index + "'/> <span id='span_img_" + index + "'><a onclick='RemoveProductImage(" + index + ")'>Xóa</a></span> <br/>");
+                            img.attr("style", "height:250px;width: 250px");
+                            img.attr("src", e.target.result);
+                            //  console.log(e.target.result);
+                            dvPreview.append(img);
+                            index++;
+                        }
+                        reader.readAsDataURL(file[0]);
+                    } else {
+                        alert(file[0].name + " is not a valid image file.");
+                        dvPreview.html("");
+                        return false;
+                    }
+
+
+                });
+                $("#divAddMoreImage").show();
+            } else {
+                alert("This browser does not support HTML5 FileReader.");
+            }
+        });
     });
 
+    function ProductInsert() {
+
+        // var imageBase64 = $('#imgPreview').attr("src");
+        var lstImageSrc = "";
+        // Lấy tất cả cả thẻ img trong thẻ div có id là dvPreview
+
+        $("#dvPreview img").each(function (index, item) {
+            //lấy src của từng ảnh trong thẻ Div dvPreview
+            var imageBase64 = item.src;
+            if (imageBase64 != null || imageBase64 != "") {
+                // Cắt bỏ đi data:image/jpeg;base64,
+                imageBase64 = imageBase64.split(',')[1];
+                lstImageSrc += imageBase64 + "_";
+            }
+            // console.log(imageBase64);
+        });
+
+        // Cắt bỏ ký tự "_" ở cuối cùng
+        if (lstImageSrc != null && lstImageSrc.length > 0) {
+            lstImageSrc = lstImageSrc.substring(0, lstImageSrc.length - 1);
+        }
+
+
+        var param = {
+            productID: 0,
+            productName: $("#txtProductName").val(),
+            donViTinh: "cai",
+            donGia: $("#txtProductName").val(),
+            ImageChange: imageChange,
+            base64Image: lstImageSrc
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: "/Product/ProductInsert",
+            data: param,
+            dataType: "html",
+            success: function (da_ta) {
+                $("#ProductListPartial").html("");
+                $("#ProductListPartial").html(da_ta);
+            },
+            error: function (data) {
+                console.log("error:" + JSON.stringify(data));
+            }
+        });
+
+    }
     function LoadData() {
 
         var param = {

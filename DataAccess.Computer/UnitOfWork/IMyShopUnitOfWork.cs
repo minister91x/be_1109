@@ -9,11 +9,11 @@ namespace DataAccess.Computer.UnitOfWork
 {
     public interface IMyShopUnitOfWork
     {
-        //IProductRepository _productRepository { get; }
-        //IAccountRepository _accountRepository { get; }
+        IProductRepository _productRepository { get; }
+        IAccountRepository _accountRepository { get; }
 
-        IAccountGenericRepository _accountGenericRepository { get; }
-        IProductGenericRepository _productGenericRepository { get; }
+        //IAccountGenericRepository _accountGenericRepository { get; }
+        //IProductGenericRepository _productGenericRepository { get; }
         int SaveChange();
 
     }

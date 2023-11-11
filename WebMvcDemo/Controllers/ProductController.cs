@@ -56,6 +56,40 @@ namespace WebMvcDemo.Controllers
 
             return PartialView(lst);
         }
+
+
+        public ActionResult ProductInsert(ProductInsertRequestData requestData)
+        {
+            var returnData = new ReturnData();
+            try
+            {
+                var url = "http://localhost:5235/api/";
+                var base_url = "Product/ProductInsert";
+                var token = Request.Cookies["BE_1109_Token"] != null ? Request.Cookies["BE_1109_Token"].Value : string.Empty;
+
+                //Đữa dữ liệu từ Object (class) sang Json
+                var jsondata = JsonConvert.SerializeObject(requestData);
+
+                // Gọi Server để lấy kết quả
+                var result_from_server = Computer.Common.HttpRequest
+                    .WebPostWithToken(url, base_url, jsondata, token);
+
+
+
+                // Server trả về kết quả thì đem dữ liệu ở dạng Json convert sang Object để hiển thị
+                var result_data = JsonConvert.DeserializeObject<ReturnData>(result_from_server);
+                returnData.ResponseCode = result_data.ResponseCode;
+                returnData.Description = result_data.Description;
+                return Json(returnData, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            return Json(returnData, JsonRequestBehavior.AllowGet);
+        }
     }
 
     public class HoaDonDienTu

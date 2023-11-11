@@ -10,32 +10,36 @@ namespace DataAccess.Computer.UnitOfWork
 {
     public class MyShopUnitOfWork : IMyShopUnitOfWork
     {
-        // private MyShopDbContext _dbContext;
-        //public IProductRepository _productRepository { get; }
-        //public IAccountRepository _accountRepository { get; }
-
-        //public MyShopUnitOfWork(MyShopDbContext dbContext , IProductRepository productRepository
-        //    , IAccountRepository accountRepositor)
-        //{
-        //    _dbContext= dbContext;
-        //    _productRepository= productRepository;
-        //    _accountRepository= accountRepositor;
-        //}
-
-
         private MyShopDbContext _dbContext;
+        public IProductRepository _productRepository { get; }
+        public IAccountRepository _accountRepository { get; }
 
-        IAccountGenericRepository _accountGenericRepository { get; }
-        IProductGenericRepository _productGenericRepository { get; }
-
-        public MyShopUnitOfWork(MyShopDbContext dbContext,
-            IAccountGenericRepository accountGenericRepository,
-            IProductGenericRepository productGenericRepository)
+        public MyShopUnitOfWork(MyShopDbContext dbContext, IProductRepository productRepository
+            , IAccountRepository accountRepositor)
         {
             _dbContext = dbContext;
-            _accountGenericRepository = accountGenericRepository;
-            _productGenericRepository = productGenericRepository;
+            _productRepository = productRepository;
+            _accountRepository = accountRepositor;
         }
+
+
+       // private MyShopDbContext _dbContext;
+
+        //IAccountGenericRepository _accountGenericRepository { get; }
+        //IProductGenericRepository _productGenericRepository { get; }
+
+        //IAccountGenericRepository IMyShopUnitOfWork._accountGenericRepository { get; }
+
+        //IProductGenericRepository IMyShopUnitOfWork._productGenericRepository { get; }
+
+        //public MyShopUnitOfWork(MyShopDbContext dbContext,
+        //    IAccountGenericRepository accountGenericRepository,
+        //    IProductGenericRepository productGenericRepository)
+        //{
+        //    _dbContext = dbContext;
+        //    _accountGenericRepository = accountGenericRepository;
+        //    _productGenericRepository = productGenericRepository;
+        //}
 
         public int SaveChange()
         {

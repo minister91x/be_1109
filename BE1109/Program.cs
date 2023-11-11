@@ -17,6 +17,7 @@ builder.Services.AddDbContext<MyShopDbContext>(options =>
 
 //builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<MyShopDbContext>()
 //    .AddDefaultTokenProviders();
+builder.Services.AddStackExchangeRedisCache(options => { options.Configuration = configuration["RedisCacheUrl"]; });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {

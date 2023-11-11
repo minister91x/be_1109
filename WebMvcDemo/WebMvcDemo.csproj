@@ -133,6 +133,7 @@
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\Product\ProductListRequestData.cs" />
     <Compile Include="Models\Product\ProductList.cs" />
+    <Compile Include="Models\ReturnData.cs" />
     <Compile Include="Models\StudentModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
