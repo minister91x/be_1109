@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
+using OfficeOpenXml;
 using System.Security.Claims;
 using System.Text;
 
@@ -46,22 +47,22 @@ namespace BE1109.Controllers
                 var cacheValue = await _cache.GetAsync(key_cache);
 
                 // var result = await _myShopUnitOfWork._productRepository.GetProducts();
-               
 
-                if (cacheValue != null)
-                {
-                    var cachedDataString = Encoding.UTF8.GetString(cacheValue);
-                    if (cachedDataString != null)
-                    {
-                        list = JsonConvert.DeserializeObject<List<Product>>(cachedDataString.ToString());
-                    }
 
-                    return Ok(list);
+                //if (cacheValue != null)
+                //{
+                //    var cachedDataString = Encoding.UTF8.GetString(cacheValue);
+                //    if (cachedDataString != null)
+                //    {
+                //        list = JsonConvert.DeserializeObject<List<Product>>(cachedDataString.ToString());
+                //    }
 
-                }
+                //    return Ok(list);
 
-                 list = await _myShopUnitOfWork._productRepository.GetProducts();
+                //}
 
+              //  list = await _myShopUnitOfWork._productRepository.GetProducts();
+                list = await _myShopUnitOfWork._productRepository.GetProducts_Dapper();
                 if (list.Count > 0)
                 {
                     // lưu cache 
@@ -117,7 +118,8 @@ namespace BE1109.Controllers
                 //}
 
                 //requestData.base64Image = imageName;
-                var result = await _myShopUnitOfWork._productRepository.ProductInsert(requestData);
+               // var result = await _myShopUnitOfWork._productRepository.ProductInsert(requestData);
+                var result = await _myShopUnitOfWork._productRepository.ProductInsert_Dapper(requestData);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -127,6 +129,92 @@ namespace BE1109.Controllers
             }
         }
 
+        [HttpPost("ProductImportByExcel")]
+        public async Task<ActionResult> ProductImportByExcel([FromForm] UploadFileInputDto formFile)
+        {
+            try
+            {
+                if (formFile == null || formFile.File.Length <= 0)
+                {
+                    throw new Exception("file dữ liệu không được trống");
+                }
+
+                if (!Path.GetExtension(formFile.File.FileName).Equals(".xlsx", StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new Exception("Hệ thống chỉ hỗ trợ file .xlsx");
+                }
+
+                using (var stream = new MemoryStream())
+                {
+                    await formFile.File.CopyToAsync(stream);
+
+                    using (var package = new ExcelPackage(stream))
+                    {
+                        ExcelPackage.LicenseContext = LicenseContext.Commercial;
+                        ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+                        var rowCount = worksheet.Dimension.Rows;
+
+                        for (int row = 3; row <= rowCount; row++)
+                        {
+                            var name = worksheet.Cells[row, 2]?.Value?.ToString()?.Trim();
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+
+            return Ok();
+        }
+
+
+        [HttpPost("Export")]
+        public async Task<IActionResult> Export([FromBody] ProductGetListRequestData requestData)
+        {
+            var contentRoot = _config["TemplateEXCEL"] ?? "";
+            var webRoot = Path.Combine(contentRoot, "Template");
+            var templateFileInfo = new FileInfo(Path.Combine(contentRoot, "CheckDailyTemplate.xlsx"));
+            var packageReport = await DesignWorkSheetExportAsync(requestData, templateFileInfo);
+
+            return File(packageReport, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Report.xlsx");
+        }
+
+        private async Task<byte[]?> DesignWorkSheetExportAsync(ProductGetListRequestData requestData, FileInfo path)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.Commercial;
+
+            using (var package = new ExcelPackage(path))
+            {
+                //Tạo mới package execl
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Data");
+                var list = await _myShopUnitOfWork._productRepository.GetProducts();
+
+
+                worksheet.Cells["A1:Q1"].Merge = true;
+                worksheet.Cells["A1:Q1"].Value = "Export";
+                worksheet.Cells["A2"].Value = "PRODUCTNAME";
+                worksheet.Cells["B2"].Value = "DonViTinh";
+                worksheet.Cells["C2"].Value = "DonGia";
+                worksheet.Cells["D2"].Value = "lINK";
+                int start_row_index = 3;
+                int total = list.Count;
+
+                foreach (var item in list)
+                {
+                    worksheet.Cells[start_row_index, 1].Value = item.ProductName;
+                    worksheet.Cells[start_row_index, 2].Value = item.DonViTinh;
+                    worksheet.Cells[start_row_index, 3].Value = item.DonGia;
+                    start_row_index++;
+                   
+                }
+
+                package.Save();
+                return package.GetAsByteArray();
+            }
+        }
         private UserModel GetCurrentUser()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;

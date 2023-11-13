@@ -1,4 +1,5 @@
 using BE1109;
+using DataAccess.Computer.Dapper;
 using DataAccess.Computer.DBContext;
 using DataAccess.Computer.IServices;
 using DataAccess.Computer.Services;
@@ -43,6 +44,7 @@ builder.Services.AddTransient<IAccountRepository, AccountRepository>();
 builder.Services.AddTransient<IAccountGenericRepository, AccountGenericRepository>();
 builder.Services.AddTransient<IProductGenericRepository, ProductGenericRepository>();
 builder.Services.AddTransient<IMyShopUnitOfWork, MyShopUnitOfWork>();
+builder.Services.AddTransient<IApplicationDbConnection, ApplicationDbConnection>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
