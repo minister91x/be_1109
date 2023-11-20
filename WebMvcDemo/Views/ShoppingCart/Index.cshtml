@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<WebMvcDemo.Models.ShoppingCart>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th style="width:10%">Quantity</th>
+            <th>TotalAmount</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                var totalAmount = item.Price * item.Quantity;
+                <tr id="trProduct_@item.ProductId">
+                    <td>@item.ProductId</td>
+                    <td>@item.ProductName</td>
+                    <td>@string.Format("{0:##,#}", item.Price) VND</td>
+                    <td>
+                        <input type="number" class="form-control" style="" id="txtQuantity" value="@item.Quantity"
+                               data-productid="@item.ProductId"
+                               data-productname="@item.ProductName"
+                               data-price="@item.Price"
+                               onchange="UpdateItemToCart(this)" />
+                    </td>
+                    <td>
+                        @string.Format("{0:##,#}", totalAmount) VND
+                    </td>
+                    <td>
+                        <a data-productid="@item.ProductId"
+                           data-productname="@item.ProductName"
+                           data-price="@item.Price"
+                           onclick="RemoveItemFromCart(this)">Xóa</a>
+                    </td>
+                </tr>
+
+            }
+        }
+    </tbody>
+</table>
+
+<div class="form-group">
+    <label for="email">Email address:</label>
+    <input type="email" class="form-control" id="txtEmail" style="width:50%">
+</div>
+<div class="form-group">
+    <label for="pwd">Họ tên:</label>
+    <input type="text" class="form-control" id="txtFullName" style="width:50%">
+</div>
+<div class="form-group">
+    <label for="pwd">Số điện thoại:</label>
+    <input type="text" class="form-control" id="txtPhoneNumber" style="width:50%">
+</div>
+
+<div class="form-group">
+    <label for="pwd">Địa chỉ:</label>
+    <input type="text" class="form-control" id="txtAddress" style="width:50%">
+</div>
+
+<button type="button" class="btn btn-success" id="btnCheckOut">Đặt hàng</button>

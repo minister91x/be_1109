@@ -6,6 +6,7 @@
             <th>productID</th>
             <th>productName</th>
             <th>donGia</th>
+            <th>Thêm vào giỏ</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -18,7 +19,15 @@
                     <td>@item.productID</td>
                     <td>@item.productName</td>
                     <td>@item.donGia</td>
-                    <td><a class="btn btn-primary">Sửa</a>
+                    <td>
+                        <a data-productid="@item.productID"
+                           data-productname="@item.productName"
+                           data-price="@item.donGia"
+                           onclick="AddItemToCart(this)"
+                           >Thêm vào giỏ</a>
+                    <td>
+                    
+                    <a class="btn btn-primary">Sửa</a>
                         <a class="btn btn-danger">Xóa</a></td>
                 </tr>
             }
