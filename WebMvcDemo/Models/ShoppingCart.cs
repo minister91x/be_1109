@@ -15,4 +15,27 @@ namespace WebMvcDemo.Models
         public int Quantity { get; set; }
 
     }
+
+    public class Customer
+    {
+        public int CustomerID { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerEmail { get; set; }
+        public string CustomerPhoneNumber { get; set; }
+        public string CustomerAddress { get; set; }
+       // public DateTime CreatedDate { get; set; }
+    }
+
+    public class OrderRequest
+    {
+        public int ProductID { get; set; }
+        public int Quantity { get; set; }
+    }
+    public class CreateOrderRequestData : RequestData
+    {
+        public Customer customer { get; set; }
+        public List<OrderRequest> orderItems { get; set; }
+
+
+    }
 }

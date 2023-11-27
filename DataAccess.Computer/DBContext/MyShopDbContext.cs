@@ -35,6 +35,7 @@ namespace DataAccess.Computer.DBContext
         public DbSet<Account> user { get; set; }
         public DbSet<function> function { get; set; }
         public DbSet<userfunction> userfunction { get; set; }
+        public DbSet<Customer> customer { get; set; }
     }
 
 }

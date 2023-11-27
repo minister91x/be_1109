@@ -50,6 +50,7 @@ namespace DataAccess.Computer.DO
         public int Code { get; set; }
         public string token { get; set; }
         public string refeshToken { get; set; }
+        public int ResponseCode { get; set; }
         public string Desciption { get; set; }
     }
 

@@ -69,3 +69,49 @@
 </div>
 
 <button type="button" class="btn btn-success" id="btnCheckOut">Đặt hàng</button>
+<script>
+    $(document).ready(function () {
+
+        $("#btnCheckOut").click(function () {
+            SaveToDB();
+        });
+    });
+
+    function SaveToDB() {
+
+        var email = $("#txtEmail").val();
+        var fullName = $("#txtFullName").val();
+        var phoneNumber = $("#txtPhoneNumber").val();
+        var address = $("#txtAddress").val();
+
+        var param = {
+            CustomerName: fullName,
+            CustomerEmail: email,
+            CustomerPhoneNumber: phoneNumber,
+            CustomerAddress: address
+        };
+
+
+        $.ajax({
+            type: 'POST',
+            url: "/ShoppingCart/CheckOut",
+            data: param,
+            dataType: "json",
+            success: function (da_ta) {
+                if (da_ta.code > 0) {
+                    alert("Đặt hàng thành công!");
+                    document.cookie = 'MyShoppingCart=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+
+                } else {
+                    alert(da_ta.desciption);
+                }
+            },
+            error: function (data) {
+                console.log("error:" + JSON.stringify(data));
+            }
+        });
+
+    }
+
+
+</script>
